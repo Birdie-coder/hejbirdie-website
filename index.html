@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="birdielove – Die Dating-App für echte Verbindungen. Bald im App Store.">
+<title>birdielove – Find your match</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pink:#E8608A;
+  --pink-dim:rgba(232,96,138,0.15);
+  --pink-glow:rgba(232,96,138,0.25);
+  --lime:#A8E063;
+  --purple-deep:#0E0B18;
+  --purple-mid:#14102A;
+  --purple-card:#1C1730;
+  --purple-card2:#221C3A;
+  --purple-border:rgba(180,140,220,0.12);
+  --purple-muted:#8B7AAA;
+  --white:#FFFFFF;
+  --white-70:rgba(255,255,255,0.7);
+  --white-40:rgba(255,255,255,0.4);
+  --white-15:rgba(255,255,255,0.07);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--purple-deep);color:var(--white);overflow-x:hidden;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.6}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.25rem 2.5rem;background:rgba(14,11,24,0.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--purple-border)}
+.nav-logo{display:flex;flex-direction:column;line-height:1}
+.nav-logo-main{font-family:'DM Serif Display',serif;font-size:1.4rem;letter-spacing:-0.01em}
+.nav-logo-main .birdie{color:var(--white)}.nav-logo-main .love{color:var(--pink)}
+.nav-logo-sub{font-size:0.6rem;letter-spacing:0.2em;color:var(--white-40);text-transform:uppercase;margin-top:1px;font-weight:300}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{font-size:0.85rem;color:var(--white-70);text-decoration:none;font-weight:400;transition:color 0.2s}
+.nav-links a:hover{color:var(--white)}
+.btn-nav{background:var(--pink)!important;color:white!important;padding:0.5rem 1.25rem;border-radius:100px;font-weight:500!important;transition:opacity 0.2s,transform 0.15s!important}
+.btn-nav:hover{opacity:0.88!important;transform:translateY(-1px)}
+
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:8rem 2.5rem 4rem;gap:3rem;max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.hero::before{content:'';position:absolute;top:20%;left:0;width:500px;height:500px;background:radial-gradient(ellipse,rgba(232,96,138,0.12) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:10%;right:10%;width:400px;height:400px;background:radial-gradient(ellipse,rgba(100,60,180,0.15) 0%,transparent 70%);pointer-events:none}
+.hero-text{position:relative;z-index:2}
+
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;border:1px solid var(--purple-border);background:var(--white-15);color:var(--white-70);font-size:0.75rem;font-weight:400;padding:0.4rem 1rem;border-radius:100px;margin-bottom:2rem;letter-spacing:0.03em}
+.badge-dot{width:6px;height:6px;background:var(--lime);border-radius:50%;box-shadow:0 0 8px var(--lime);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 8px var(--lime)}50%{opacity:0.5;box-shadow:0 0 3px var(--lime)}}
+
+h1{font-family:'DM Serif Display',serif;font-size:clamp(3rem,5vw,4.5rem);line-height:1.05;letter-spacing:-0.02em;margin-bottom:1.5rem}
+h1 .accent{color:var(--pink)}
+h1 em{font-style:italic;color:var(--white-70)}
+.hero-sub{font-size:1rem;color:var(--white-70);line-height:1.75;margin-bottom:2.5rem;font-weight:300;max-width:420px}
+.hero-cta{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:0.6rem;background:var(--pink);color:white;padding:0.9rem 1.75rem;border-radius:100px;font-size:0.9rem;font-weight:500;text-decoration:none;transition:opacity 0.2s,transform 0.2s;letter-spacing:0.01em;box-shadow:0 8px 32px rgba(232,96,138,0.35)}
+.btn-primary:hover{opacity:0.88;transform:translateY(-2px)}
+.btn-ghost{display:inline-flex;align-items:center;gap:0.5rem;color:var(--white-70);font-size:0.85rem;text-decoration:none;font-weight:400;transition:color 0.2s;border:1px solid var(--purple-border);padding:0.9rem 1.5rem;border-radius:100px}
+.btn-ghost:hover{color:var(--white);border-color:rgba(255,255,255,0.2)}
+
+.stats-row{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--purple-border)}
+.stat-num{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--white);letter-spacing:-0.02em}
+.stat-num span{color:var(--pink)}
+.stat-label{font-size:0.75rem;color:var(--white-40);font-weight:300;margin-top:2px}
+
+.hero-visual{display:flex;justify-content:center;align-items:center;position:relative;z-index:2}
+.phone-wrap{position:relative;animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-20px) rotate(-1.5deg)}}
+.phone-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;height:300px;background:radial-gradient(ellipse,rgba(232,96,138,0.2) 0%,transparent 70%);pointer-events:none;z-index:-1}
+.phone{width:270px;background:#0A0815;border-radius:44px;padding:14px;border:1px solid rgba(255,255,255,0.08);box-shadow:0 0 0 1px rgba(255,255,255,0.05),0 40px 80px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.06);position:relative}
+.phone-notch{width:100px;height:28px;background:#0A0815;border-radius:0 0 20px 20px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;gap:6px;position:relative;z-index:2}
+.notch-cam{width:10px;height:10px;border-radius:50%;background:#111020;border:1px solid rgba(255,255,255,0.1)}
+.notch-pill{width:50px;height:5px;border-radius:100px;background:#111020}
+.phone-screen{background:var(--purple-mid);border-radius:32px;overflow:hidden;height:490px;position:relative}
+.status-bar{display:flex;justify-content:space-between;align-items:center;padding:0.6rem 1.1rem 0.4rem;font-size:0.65rem;font-weight:500;color:var(--white)}
+.status-right{display:flex;gap:4px;align-items:center}
+.signal-bar{width:3px;border-radius:1px;background:var(--white)}
+.app-header{padding:0.5rem 1rem 0.75rem;display:flex;justify-content:space-between;align-items:center}
+.app-logo-wrap{display:flex;flex-direction:column;line-height:1}
+.app-logo-main{font-family:'DM Serif Display',serif;font-size:1.25rem;letter-spacing:-0.01em}
+.app-logo-main .birdie{color:var(--white)}.app-logo-main .love{color:var(--pink)}
+.app-logo-sub{font-size:0.5rem;letter-spacing:0.18em;color:var(--white-40);text-transform:uppercase;font-weight:300;margin-top:1px}
+.header-right{display:flex;align-items:center;gap:8px}
+.hamburger{display:flex;flex-direction:column;gap:3px;cursor:pointer}
+.hamburger span{width:18px;height:1.5px;background:var(--white-70);border-radius:2px}
+.notif-badge{width:22px;height:22px;border-radius:50%;background:var(--pink);font-size:0.6rem;font-weight:500;display:flex;align-items:center;justify-content:center;box-shadow:0 0 12px rgba(232,96,138,0.6)}
+.app-tabs{display:flex;gap:0;margin:0 0.75rem 0.75rem;border:1px solid var(--purple-border);border-radius:12px;overflow:hidden}
+.tab{flex:1;text-align:center;font-size:0.55rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.55rem 0.2rem;color:var(--white-40);border-right:1px solid var(--purple-border)}
+.tab:last-child{border-right:none}
+.tab.active{color:var(--pink);background:var(--pink-dim)}
+.profile-area{padding:0 0.75rem}
+.profile-card{background:var(--purple-card);border-radius:20px;overflow:hidden;border:1px solid var(--purple-border);position:relative}
+.card-badges{position:absolute;top:0.75rem;left:0.75rem;right:0.75rem;display:flex;justify-content:space-between;z-index:2}
+.badge-verified{display:inline-flex;align-items:center;gap:4px;background:rgba(14,11,24,0.75);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);color:var(--white);font-size:0.6rem;font-weight:500;padding:0.3rem 0.65rem;border-radius:100px}
+.badge-verified .check{color:var(--lime)}
+.badge-match{display:inline-flex;align-items:center;gap:4px;background:rgba(14,11,24,0.75);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.1);color:var(--white);font-size:0.6rem;font-weight:500;padding:0.3rem 0.65rem;border-radius:100px}
+.match-dot{width:6px;height:6px;border-radius:50%;background:var(--pink);box-shadow:0 0 6px var(--pink)}
+.profile-photo{height:200px;background:linear-gradient(160deg,#1E1535 0%,#2A1845 40%,#1C1030 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.profile-photo::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 40% 60%,rgba(120,60,180,0.3) 0%,transparent 60%),radial-gradient(ellipse at 70% 30%,rgba(232,96,138,0.1) 0%,transparent 50%)}
+.avatar-placeholder{width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);position:relative;z-index:1}
+.profile-info{padding:0.75rem}
+.profile-name{font-family:'DM Serif Display',serif;font-size:1.4rem;letter-spacing:-0.01em;margin-bottom:0.25rem;display:flex;align-items:baseline;gap:0.5rem}
+.profile-name .age{font-size:0.9rem;color:var(--white-70);font-family:'DM Sans',sans-serif;font-weight:300}
+.profile-location{font-size:0.65rem;color:var(--white-40);display:flex;align-items:center;gap:4px;margin-bottom:0.5rem}
+.profile-quote{font-size:0.65rem;color:var(--white-70);font-style:italic;line-height:1.5;font-weight:300}
+.app-actions{display:flex;justify-content:center;gap:1rem;padding:0.75rem}
+.act-btn{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;border:1px solid var(--purple-border);background:var(--purple-card2);cursor:pointer}
+.act-like{background:var(--pink);border-color:var(--pink);box-shadow:0 0 20px rgba(232,96,138,0.4);font-size:1.1rem}
+
+.features{position:relative;z-index:1;padding:7rem 2.5rem;background:var(--purple-mid);border-top:1px solid var(--purple-border)}
+.features-inner{max-width:1100px;margin:0 auto}
+.section-label{font-size:0.7rem;font-weight:500;letter-spacing:0.15em;color:var(--pink);text-transform:uppercase;margin-bottom:1rem}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(2.2rem,4vw,3rem);line-height:1.1;letter-spacing:-0.025em;margin-bottom:3.5rem;max-width:520px}
+.section-title em{font-style:italic;color:var(--white-70)}
+.section-title .accent{color:var(--pink)}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.feature-card{background:var(--purple-card);border:1px solid var(--purple-border);border-radius:20px;padding:1.75rem;transition:border-color 0.25s,transform 0.25s}
+.feature-card:hover{border-color:rgba(232,96,138,0.3);transform:translateY(-4px)}
+.feature-icon{width:42px;height:42px;border-radius:12px;background:var(--pink-dim);border:1px solid rgba(232,96,138,0.2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:1.25rem}
+.feature-card h3{font-family:'DM Serif Display',serif;font-size:1.15rem;margin-bottom:0.6rem;letter-spacing:-0.01em}
+.feature-card p{font-size:0.85rem;color:var(--white-70);line-height:1.7;font-weight:300}
+
+.cta-section{position:relative;z-index:1;padding:7rem 2.5rem;text-align:center;max-width:680px;margin:0 auto}
+.cta-section h2{font-family:'DM Serif Display',serif;font-size:clamp(2.2rem,4vw,3.2rem);letter-spacing:-0.03em;line-height:1.08;margin-bottom:1.25rem}
+.cta-section h2 em{font-style:italic;color:var(--pink)}
+.cta-section p{color:var(--white-70);font-weight:300;line-height:1.75;margin-bottom:2.5rem;font-size:1rem}
+.store-btn{display:inline-flex;align-items:center;gap:0.75rem;background:var(--white);color:var(--purple-deep);padding:0.9rem 1.75rem;border-radius:14px;text-decoration:none;transition:transform 0.2s,opacity 0.2s;box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.store-btn:hover{transform:translateY(-2px);opacity:0.92}
+.store-btn-text{text-align:left}
+.store-btn-text small{display:block;font-size:0.65rem;color:var(--purple-muted);font-weight:300}
+.store-btn-text strong{font-size:0.95rem;font-weight:500;font-family:'DM Serif Display',serif}
+
+footer{position:relative;z-index:1;border-top:1px solid var(--purple-border);padding:1.75rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;background:var(--purple-deep)}
+.footer-logo{display:flex;flex-direction:column;line-height:1}
+.footer-logo-main{font-family:'DM Serif Display',serif;font-size:1.1rem}
+.footer-logo-main .birdie{color:var(--white)}.footer-logo-main .love{color:var(--pink)}
+.footer-logo-sub{font-size:0.5rem;letter-spacing:0.18em;color:var(--white-40);text-transform:uppercase;margin-top:1px;font-weight:300}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.footer-links a{font-size:0.78rem;color:var(--white-40);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--white-70)}
+.footer-copy{font-size:0.72rem;color:var(--white-40);font-weight:300}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-main"><span class="birdie">birdie</span><span class="love">love</span></div>
+    <div class="nav-logo-sub">lovebirds</div>
+  </div>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#download">Download</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="#download" class="btn-nav">Jetzt testen</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      Bald verfügbar · App Store
+    </div>
+    <h1>Finde deine<br><em>echte</em> <span class="accent">Verbindung.</span></h1>
+    <p class="hero-sub">birdielove verbindet Menschen auf eine ehrliche, entspannte Art. Kein endloses Swipen – nur Matches, die wirklich zu dir passen.</p>
+    <div class="hero-cta">
+      <a href="#download" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        App Store Notify
+      </a>
+      <a href="#features" class="btn-ghost">Features entdecken →</a>
+    </div>
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-num">10k<span>+</span></div><div class="stat-label">Warteliste</div></div>
+      <div class="stat-item"><div class="stat-num">94<span>%</span></div><div class="stat-label">Match-Qualität</div></div>
+      <div class="stat-item"><div class="stat-num">100<span>%</span></div><div class="stat-label">DSGVO-konform</div></div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="phone-glow"></div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="phone-notch"><div class="notch-pill"></div><div class="notch-cam"></div></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span>09:41</span>
+            <div class="status-right">
+              <div class="signal-bar" style="height:5px"></div>
+              <div class="signal-bar" style="height:7px"></div>
+              <div class="signal-bar" style="height:9px"></div>
+              <div class="signal-bar" style="height:11px;opacity:0.3"></div>
+              <svg width="14" height="10" viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:4px"><rect x="1" y="3" width="18" height="10" rx="2"/><path d="M20 7h3v2h-3"/></svg>
+            </div>
+          </div>
+          <div class="app-header">
+            <div class="app-logo-wrap">
+              <div class="app-logo-main"><span class="birdie">birdie</span><span class="love">love</span></div>
+              <div class="app-logo-sub">lovebirds</div>
+            </div>
+            <div class="header-right">
+              <div class="hamburger"><span></span><span></span><span></span></div>
+              <div class="notif-badge">3</div>
+            </div>
+          </div>
+          <div class="app-tabs">
+            <div class="tab active">Entdecken</div>
+            <div class="tab">In der Nähe</div>
+            <div class="tab">Neu</div>
+          </div>
+          <div class="profile-area">
+            <div class="profile-card">
+              <div class="card-badges">
+                <div class="badge-verified"><span class="check">✓</span> Verifiziert</div>
+                <div class="badge-match"><div class="match-dot"></div>94% Match</div>
+              </div>
+              <div class="profile-photo"><div class="avatar-placeholder"></div></div>
+              <div class="profile-info">
+                <div class="profile-name">Léa <span class="age">28</span></div>
+                <div class="profile-location">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+                  Köln · 42 km entfernt
+                </div>
+                <div class="profile-quote">"Liebe Reisen, guten Wein und lange Abende auf..."</div>
+              </div>
+            </div>
+            <div class="app-actions">
+              <div class="act-btn">✕</div>
+              <div class="act-btn act-like">♥</div>
+              <div class="act-btn">★</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="features-inner">
+    <div class="section-label">Warum birdielove</div>
+    <h2 class="section-title">Dating, das sich<br><em>anders</em> anfühlt. <span class="accent">Besser.</span></h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Sicher &amp; privat</h3>
+        <p>Deine Daten bleiben deine Daten. DSGVO-konform, verschlüsselt, transparent – kein Kleingedrucktes.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✓</div>
+        <h3>Verifizierte Profile</h3>
+        <p>Kein Catfishing. Verifizierte Nutzer, echte Fotos – du weißt immer, mit wem du sprichst.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">♥</div>
+        <h3>Smarte Matches</h3>
+        <p>Unser Algorithmus findet Menschen, die wirklich zu dir passen – kein endloses Swipen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="download">
+  <h2>Bereit für dein<br><em>nächstes Kapitel?</em></h2>
+  <p>birdielove erscheint bald im Apple App Store. Trag dich in die Warteliste ein und erhalte als Erste Zugang.</p>
+  <a href="#" class="store-btn">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="var(--purple-deep)"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+    <div class="store-btn-text"><small>Bald im</small><strong>App Store</strong></div>
+  </a>
+</section>
+
+<footer>
+  <div class="footer-logo">
+    <div class="footer-logo-main"><span class="birdie">birdie</span><span class="love">love</span></div>
+    <div class="footer-logo-sub">lovebirds</div>
+  </div>
+  <div class="footer-links">
+    <a href="datenschutz.html">Datenschutzerklärung</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="eula.html">Nutzungsbedingungen</a>
+    <a href="mailto:hallo@hejbirdie.com">Kontakt</a>
+  </div>
+  <div class="footer-copy">© 2026 birdielove · Düsseldorf</div>
+</footer>
+
+</body>
+</html>
